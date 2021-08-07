@@ -1,0 +1,21 @@
+#visualizer-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.number {
+  background-color: gold;
+  border-width: 3px;
+  border-style: solid;
+  border-color: gold;
+}
+
+.pivot {
+  background-color: tomato;
+  border-color: tomato;
+}
+
+.active {
+  border-color: darkslategray;
+}

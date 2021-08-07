@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "baseUrl": "./",
+    "target": "es5",
+    "strict": true,
+    "module": "es2020",
+    "jsx": "react",
+    "lib": ["dom", "es2020"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "moduleResolution":"Node"
+  }
+}
