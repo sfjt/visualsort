@@ -7,7 +7,7 @@ module.exports = {
       main: path.resolve(__dirname, "./src/index.tsx")
     },
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "./docs"),
     filename: "bundle.js"
   },
   module: {
@@ -35,7 +35,7 @@ module.exports = {
   ],
   devServer: {
     port: 8080,
-    contentBase: "dist",
+    contentBase: "docs",
     open: true,
     hot: true
   }
