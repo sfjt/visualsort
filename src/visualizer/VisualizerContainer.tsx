@@ -67,9 +67,9 @@ export class VisualizerContainer extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const nv = this.state.snapshot.map((v) => {
-      return <NumberVisualizer value={v.n * 20} tag={v.tag} width={10} />
-    }) 
+    const nv = this.state.snapshot.map((v, i) => {
+      return <NumberVisualizer  key={i.toString()} value={v.n * 20} tag={v.tag} width={10} />
+    });
     return(
       <div id="visualizer-container">
         {nv}
