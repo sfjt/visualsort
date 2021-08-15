@@ -19,5 +19,10 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
   ],
   rules: {
+    "semi": ["error", "always"],
+    "semi-spacing": ["error", {"after": true, "before": false}],
+    "no-extra-semi": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error"
   },
 };

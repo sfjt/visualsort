@@ -1,0 +1,46 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+$number-color: gold;
+$active-number-color: tomato;
+
+header {
+  margin-bottom: 1em;
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+  span.repo {
+    font-size: 0.7em;
+
+    #github-mark {
+      margin-right: 1em;
+    }
+  }
+}
+
+#app {
+  padding: 15px;
+}
+
+#visualizer-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+
+  .number {
+    background-color: $number-color;
+    border-width: 3px;
+    border-style: solid;
+    border-color: $number-color;  
+  }
+
+  .active {
+    background-color: $active-number-color;
+    border-color: $active-number-color;
+  }
+
+  .pivot {
+    border-color: limegreen;
+  }  
+}

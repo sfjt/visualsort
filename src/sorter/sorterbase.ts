@@ -3,6 +3,7 @@ export class Sorter {
   public snapshots: Snapshot[];
   public result: number[];
   protected _data: number[];
+  public static algorithmName = "";
 
   constructor(input: number[]) {
     this.input = input.slice();
@@ -18,7 +19,7 @@ export class Sorter {
   }
   
   protected _takeSnapshot(instructions: AddTagInstructions): void {
-    const snap = toSnapshot(this._data)
+    const snap = toSnapshot(this._data);
     instructions.forEach((v) => {
       const idx = v[0];
       if (idx == null) return;
