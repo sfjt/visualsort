@@ -6,7 +6,6 @@ const fromRoot = (...segments) => {
 };
 
 module.exports = {
-  mode: "development",
   entry: {
       main: fromRoot("src", "App.tsx")
     },
@@ -41,11 +40,5 @@ module.exports = {
     new HtmlWebpackPlugin({
         template: fromRoot("src", "index.html")
       })
-  ],
-  devServer: {
-    port: 8080,
-    contentBase: "docs",
-    open: true,
-    hot: true
-  }
+  ]
 };
