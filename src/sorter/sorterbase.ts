@@ -18,7 +18,7 @@ export class Sorter {
   }
   
   protected _takeSnapshot(instructions: AddTagInstructions): void {
-    const snap = toSnapshot(this._data)
+    const snap = toSnapshot(this._data);
     instructions.forEach((v) => {
       const idx = v[0];
       if (idx == null) return;
