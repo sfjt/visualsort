@@ -1,13 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const fromRoot = (...segments) => {
+  return path.resolve(__dirname, ...segments)
+};
+
 module.exports = {
   mode: "development",
   entry: {
-      main: path.resolve(__dirname, "./src/index.tsx")
+      main: fromRoot("src", "App.tsx")
     },
   output: {
-    path: path.resolve(__dirname, "./docs"),
+    path: fromRoot("docs"),
     filename: "bundle.js"
   },
   module: {
@@ -17,11 +21,16 @@ module.exports = {
         use: "ts-loader"
       },
       {
-        test: /\.css/,
+        test: /\.scss$/,
         use: [
           "style-loader",
-          "css-loader"
+          "css-loader",
+          "sass-loader"
         ]
+      },
+      {
+        test: /\.png$/,
+        loader: 'url-loader'
       }
     ]
   },
@@ -30,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        template: "./src/index.html"
+        template: fromRoot("src", "index.html")
       })
   ],
   devServer: {

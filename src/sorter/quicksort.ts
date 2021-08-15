@@ -43,7 +43,6 @@ export class QuickSort extends Sorter {
       if(lo < 0) return;
 
       const p = partition(a, lo, hi);
-      this._takeSnapshot([]);
 
       quickSort(a, lo, p);
       quickSort(a, p + 1, hi);
