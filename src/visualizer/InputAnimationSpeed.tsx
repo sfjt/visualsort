@@ -1,13 +1,10 @@
 import React, { ChangeEvent } from "react";
 
-type ChangeHandler = (e: ChangeEvent<HTMLInputElement>) => void;
-
 type Props = {
   defaultValue: number;
   max: number;
-  onAnimationSpeedChange: ChangeHandler;
+  onAnimationSpeedChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
-
 
 export const InputAnimationSpeed: React.FC<Props> = (props) => {
   return (

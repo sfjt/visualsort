@@ -5,9 +5,6 @@ import { SelectAlgo } from "./SelectAlgo";
 import { InputNumElements } from "./InputNumElements";
 import { InputAnimationSpeed } from "./InputAnimationSpeed";
 
-type SorterCreatedHandler = (sorter: Sorter) => void;
-type AnimationSpeedChangeHandler = (e:  ChangeEvent<HTMLInputElement>) => void;
-
 type Props = {
   defaultAlgoName: string;
   defaultNumElements: number;
@@ -15,8 +12,8 @@ type Props = {
   defaultAnimationSpeedIndex: number;
   animationSpeeds: number[];
   availableAlgoNames: string[];
-  onAnimationSpeedChange: AnimationSpeedChangeHandler;
-  onSorterCreated: SorterCreatedHandler;
+  onAnimationSpeedChange: (e:  ChangeEvent<HTMLInputElement>) => void;
+  onSorterCreated:  (sorter: Sorter) => void;
 }
 
 type State = {
@@ -47,6 +44,10 @@ export const SortSettings: FC<Props> = (props)=> {
     props.onSorterCreated(sorter);
   };
 
+  const startButtonAvailable = (numElements: number, max: number) => {
+    return numElements > 1 && numElements <= max;
+  };
+
   return (
     <form id="sorter-config">
       <div className="row row-cols-auto mb-3">
@@ -72,12 +73,23 @@ export const SortSettings: FC<Props> = (props)=> {
         </div>
 
         <div className="col d-flex align-items-center">
-          <button
-            type="button"
-            className="btn btn-primary btn-lg"
-            onClick={onStartButtonClick}>
-            Start
-          </button>
+          {startButtonAvailable(state.numElements, props.maxNumElements) &&
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              onClick={onStartButtonClick}>
+              Start
+            </button>
+          }
+
+          {!startButtonAvailable(state.numElements, props.maxNumElements) &&
+            <button
+              type="button"
+              className="btn btn-secondary btn-lg"
+              disabled>
+              Start
+            </button>
+          }
         </div>
       </div>
     </form>

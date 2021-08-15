@@ -7,7 +7,8 @@ type Props = {
   input: number[];
   snapshots: Snapshot[];
   result: number[];
-  scale: number;
+  numberDisplayScale: number;
+  numberDisplayWidth: number;
   animationSpeed: number;
 };
 
@@ -55,15 +56,15 @@ export const Visualizer: FC<Props> = (props)=> {
     return () => {
       killTick();
     };
-  },[state]);
+  }, [state]);
   
   const nv = state.snapshot.map((v, i) =>
   <NumberVisual 
     value={v.n}
     tag={v.tag}
-    scale={props.scale}
-    width={10}
-    key={i.toString()}
+    scale={props.numberDisplayScale}
+    width={props.numberDisplayWidth}
+    key={`nv-${i.toString()}`}
     />
   );
 
