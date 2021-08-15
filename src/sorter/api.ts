@@ -1,10 +1,9 @@
 import { Sorter } from "./sorterbase";
 import { QuickSort } from "./quicksort";
 import { randomize } from "./rendomize";
+import { conf } from "../visualizer";
 
-const quick = "Quick Sort";
-const bubble = "Bubble Sort";
-export const availableAlgoNames = [quick, bubble];
+export const availableAlgoNames = [QuickSort.algorithmName];
 
 type Request = {
   algoName: string;
@@ -12,22 +11,24 @@ type Request = {
 };
 
 export const createSorter = (req: Request): Sorter => {
+  if (req.numElements < 1 || req.numElements > conf.MAX_NUM_ELEMENTS) {
+    throw RangeError(
+      `The number of elements must be within the range of 1 - ${conf.MAX_NUM_ELEMENTS}`
+    );
+  }
   const randomized = randomize(req.numElements);
-  if (req.algoName === quick) {
+  if (req.algoName === QuickSort.algorithmName) {
     return new QuickSort(randomized);
   }
-  if(req.algoName === bubble) {
-    return new Sorter(randomized);
-  }
 
-  throw new SorterNotFoundError(
-    `Implementation for "${req.algoName}" was not found.`
+  throw new InvalidAlgorithmNameError(
+    `Algorithm named "${req.algoName}" is not available.`
   );
 };
 
-export class SorterNotFoundError extends Error {
+export class InvalidAlgorithmNameError extends Error {
   constructor(message: string) {
     super(message);
-    Object.setPrototypeOf(this, SorterNotFoundError.prototype);
+    Object.setPrototypeOf(this, InvalidAlgorithmNameError.prototype);
   }
 }

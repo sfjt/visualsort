@@ -3,6 +3,7 @@ export class Sorter {
   public snapshots: Snapshot[];
   public result: number[];
   protected _data: number[];
+  public static algorithmName = "";
 
   constructor(input: number[]) {
     this.input = input.slice();

@@ -1,6 +1,8 @@
 import { Sorter } from "./sorterbase";
 
 export class QuickSort extends Sorter {
+  public static algorithmName = "Quick Sort";
+
   sort(): void {
     if (this._data.length === 0) return;
 

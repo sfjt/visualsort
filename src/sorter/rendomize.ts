@@ -14,6 +14,6 @@ export const randomize = (numElements: number): number[] => {
     const _idx = indexes.splice(_rand, 1)[0];
     randomized.push(numbers[_idx]);
   }
-  console.log(randomized);
+  
   return randomized;
 };
