@@ -1,11 +1,9 @@
 import React, { ChangeEvent } from "react";
 
-type ChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => void;
-
 type Props = {
   defaultValue: string;
   availableAlgoNames: string[];
-  onAlgoChange: ChangeHandler;
+  onAlgoChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const SelectAlgo: React.FC<Props> = (props) =>  {

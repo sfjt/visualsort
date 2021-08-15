@@ -12,7 +12,8 @@ type State = {
   input: number[];
   snapshots: Snapshot[];
   result: number[];
-  scale: number;
+  numberDisplayScale: number;
+  numberDisplayWidth: number;
   animationSpeed: number;
   updateId: number;
 }
@@ -28,12 +29,11 @@ const defaultState: State = {
   input: defaultSorter.input,
   snapshots: defaultSorter.snapshots,
   result: defaultSorter.result,
-  scale: conf.DEFAULT_SCALE,
+  numberDisplayScale: conf.DEFAULT_SCALE,
+  numberDisplayWidth: conf.DEFAULT_WIDTH,
   animationSpeed: conf.ANIMATION_SPEEDS[conf.DEFAULT_ANIMATION_SPEED_INDEX],
   updateId: 0
 };
-
-
 
 const App: FC = () => {
   const [state, setState] = useState<State>(defaultState);
@@ -78,9 +78,10 @@ const App: FC = () => {
         input={state.input}
         snapshots={state.snapshots}
         result={state.result}
-        scale={state.scale}
+        numberDisplayScale={state.numberDisplayScale}
+        numberDisplayWidth={state.numberDisplayWidth}
         animationSpeed={state.animationSpeed}
-        key={state.updateId}/>
+        key={`animation-${state.updateId}`}/>
     </>
   );
 };

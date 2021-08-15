@@ -1,11 +1,9 @@
 import React, { ChangeEvent } from "react";
 
-type ChangeHandler = (e: ChangeEvent<HTMLInputElement>) => void;
-
 type Props = {
   defaultValue: number;
   max: number;
-  onNumElementsChange: ChangeHandler;
+  onNumElementsChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const InputNumElements: React.FC<Props> = (props) => {
@@ -22,6 +20,9 @@ export const InputNumElements: React.FC<Props> = (props) => {
         max={props.max}
         onChange={props.onNumElementsChange}>
       </input>
+      <div className="input-annotation">
+        Available number range: 1 - {props.max}
+      </div>
     </>
   );
 };
