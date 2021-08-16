@@ -3,6 +3,7 @@ import React, { ChangeEvent } from "react";
 type Props = {
   defaultValue: number;
   max: number;
+  min: number;
   onNumElementsChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -21,7 +22,7 @@ export const InputNumElements: React.FC<Props> = (props) => {
         onChange={props.onNumElementsChange}>
       </input>
       <div className="input-annotation">
-        Available number range: 1 - {props.max}
+        Available number range: {props.min} - {props.max}
       </div>
     </>
   );
