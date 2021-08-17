@@ -10,6 +10,7 @@ export const conf = {
     1
   ],
   DEFAULT_ANIMATION_SPEED_INDEX: 2,
+  MIN_NUM_ELEMENTS: 3,
   MAX_NUM_ELEMENTS: 200,
   REPO_URL: "https://github.com/sfjt/visualsort"
 };

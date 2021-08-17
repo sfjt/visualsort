@@ -9,6 +9,7 @@ type Props = {
   defaultAlgoName: string;
   defaultNumElements: number;
   maxNumElements: number;
+  minNumElements: number;
   defaultAnimationSpeedIndex: number;
   animationSpeeds: number[];
   availableAlgoNames: string[];
@@ -44,8 +45,8 @@ export const SortSettings: FC<Props> = (props)=> {
     props.onSorterCreated(sorter);
   };
 
-  const startButtonAvailable = (numElements: number, max: number) => {
-    return numElements > 1 && numElements <= max;
+  const isNumElementsValid = (numElements: number) => {
+    return numElements >= props.minNumElements && numElements <= props.maxNumElements;
   };
 
   return (
@@ -62,6 +63,7 @@ export const SortSettings: FC<Props> = (props)=> {
           <InputNumElements
             defaultValue={props.defaultNumElements}
             max={props.maxNumElements}
+            min={props.minNumElements}
             onNumElementsChange={onNumElementsChange}/>
         </div>
 
@@ -73,7 +75,7 @@ export const SortSettings: FC<Props> = (props)=> {
         </div>
 
         <div className="col d-flex align-items-center">
-          {startButtonAvailable(state.numElements, props.maxNumElements) &&
+          {isNumElementsValid(state.numElements) &&
             <button
               type="button"
               className="btn btn-primary btn-lg"
@@ -82,7 +84,7 @@ export const SortSettings: FC<Props> = (props)=> {
             </button>
           }
 
-          {!startButtonAvailable(state.numElements, props.maxNumElements) &&
+          {!isNumElementsValid(state.numElements) &&
             <button
               type="button"
               className="btn btn-secondary btn-lg"

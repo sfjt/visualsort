@@ -68,6 +68,7 @@ const App: FC = () => {
         defaultAlgoName={defaultAlgoName}
         defaultNumElements={conf.DEFAULT_NUM_ELEMENTS}
         maxNumElements={conf.MAX_NUM_ELEMENTS}
+        minNumElements={conf.MIN_NUM_ELEMENTS}
         availableAlgoNames={availableAlgoNames}
         animationSpeeds={conf.ANIMATION_SPEEDS}
         defaultAnimationSpeedIndex={conf.DEFAULT_ANIMATION_SPEED_INDEX}

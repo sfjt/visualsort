@@ -9,6 +9,13 @@ export class QuickSort extends Sorter {
     const partition = (a: number[], lo: number, hi: number): number => {
       const mid = Math.floor((lo + hi) / 2);
       const pivot = a[mid];
+      const _ts = (l: number, h: number) => {
+        return this._takeSnapshot([
+          [l, "active"],
+          [h, "active"],
+          [mid, "pivot"]
+        ]);
+      };
 
       for(;;) {
         while (a[lo] < pivot) {
@@ -21,19 +28,9 @@ export class QuickSort extends Sorter {
           return hi;
         }
 
-        this._takeSnapshot([
-          [lo, "active"],
-          [hi, "active"],
-          [mid, "pivot"]
-        ]);
-
-        swap(a, lo, hi);
-        
-        this._takeSnapshot([
-          [lo, "active"],
-          [hi, "active"],
-          [mid, "pivot"]
-        ]);
+        _ts(lo, hi);
+        this._swap(lo, hi);
+        _ts(lo, hi);
 
         lo++;
         hi--;
@@ -54,9 +51,3 @@ export class QuickSort extends Sorter {
     this.result = this._data.slice();
   }
 }
-
-const swap = (a: number[], x:number, y: number): void => {
-  const temp = a[x];
-  a[x] = a[y];
-  a[y] = temp;
-};

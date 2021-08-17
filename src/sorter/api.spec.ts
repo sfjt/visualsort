@@ -1,23 +1,26 @@
 import { createSorter, InvalidAlgorithmNameError } from "./api";
+import { Sorter } from "./sorterbase";
 import { QuickSort } from "./quicksort";
+import { BubbleSort } from "./bubblesort";
 import { conf } from "../visualizer";
 
 describe("Test createSorter", () => {
   test.each([
-    QuickSort.algorithmName
+    QuickSort.algorithmName,
+    BubbleSort.algorithmName
   ])("Can create %s instance.", (algoName) => {
-    const numElements = 1;
+    const numElements = conf.MIN_NUM_ELEMENTS;
     const sorter = createSorter({
       algoName,
       numElements
     });
 
-    expect(sorter instanceof QuickSort).toBe(true);
+    expect(sorter instanceof Sorter).toBe(true);
   });
 
   test("Throws error when undefined algo name is specified.", () => {
     const algoName = "undefined algo name";
-    const numElements = 1;
+    const numElements = conf.MIN_NUM_ELEMENTS;
     
     expect(() => {
       createSorter({
