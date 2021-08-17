@@ -1,5 +1,6 @@
 import { Sorter, UnimplementedError } from "./sorterbase";
 import { QuickSort } from "./quicksort";
+import { BubbleSort } from "./bubblesort";
 
 describe("Test Sorter Base", () => {
   test("sort method throws UninplementedError.", () => {
@@ -54,8 +55,15 @@ describe.each([
   [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
   [[], []],
 ])("Test Sorter Implementations", (input, expected) => {
-  test(`QuickSort: ${JSON.stringify(input)} should be sorted to ${JSON.stringify(expected)}.`, () => {
+  test(`${QuickSort.algorithmName}: ${JSON.stringify(input)} should be sorted to ${JSON.stringify(expected)}.`, () => {
     const qs = new QuickSort(input);
+    qs.sort();
+    
+    expect(JSON.stringify(qs.result)).toBe(JSON.stringify(expected));
+  });
+  
+  test(`${BubbleSort.algorithmName}: ${JSON.stringify(input)} should be sorted to ${JSON.stringify(expected)}.`, () => {
+    const qs = new BubbleSort(input);
     qs.sort();
     
     expect(JSON.stringify(qs.result)).toBe(JSON.stringify(expected));

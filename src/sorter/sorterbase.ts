@@ -31,6 +31,12 @@ export class Sorter {
     });
     this.snapshots.push(snap);
   }
+
+  protected _swap = (x:number, y: number): void => {
+    const temp = this._data[x];
+    this._data[x] = this._data[y];
+    this._data[y] = temp;
+  }
 }
 
 export class UnimplementedError extends Error {

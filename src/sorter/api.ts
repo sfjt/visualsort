@@ -1,9 +1,13 @@
 import { Sorter } from "./sorterbase";
 import { QuickSort } from "./quicksort";
+import { BubbleSort } from "./bubblesort";
 import { randomize } from "./rendomize";
 import { conf } from "../visualizer";
 
-export const availableAlgoNames = [QuickSort.algorithmName];
+export const availableAlgoNames = [
+  QuickSort.algorithmName,
+  BubbleSort.algorithmName
+];
 
 type Request = {
   algoName: string;
@@ -11,14 +15,17 @@ type Request = {
 };
 
 export const createSorter = (req: Request): Sorter => {
-  if (req.numElements < 1 || req.numElements > conf.MAX_NUM_ELEMENTS) {
+  if (req.numElements < conf.MIN_NUM_ELEMENTS || req.numElements > conf.MAX_NUM_ELEMENTS) {
     throw RangeError(
-      `The number of elements must be within the range of 1 - ${conf.MAX_NUM_ELEMENTS}`
+      `The number of elements must be within the range of ${conf.MIN_NUM_ELEMENTS} - ${conf.MAX_NUM_ELEMENTS}`
     );
   }
   const randomized = randomize(req.numElements);
   if (req.algoName === QuickSort.algorithmName) {
     return new QuickSort(randomized);
+  }
+  if (req.algoName === BubbleSort.algorithmName) {
+    return new BubbleSort(randomized);
   }
 
   throw new InvalidAlgorithmNameError(

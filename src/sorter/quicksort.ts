@@ -29,7 +29,7 @@ export class QuickSort extends Sorter {
         }
 
         _ts(lo, hi);
-        swap(a, lo, hi);
+        this._swap(lo, hi);
         _ts(lo, hi);
 
         lo++;
@@ -51,9 +51,3 @@ export class QuickSort extends Sorter {
     this.result = this._data.slice();
   }
 }
-
-const swap = (a: number[], x:number, y: number): void => {
-  const temp = a[x];
-  a[x] = a[y];
-  a[y] = temp;
-};
