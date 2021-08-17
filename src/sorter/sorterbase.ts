@@ -19,7 +19,9 @@ export class Sorter {
   }
   
   protected _takeSnapshot(instructions: AddTagInstructions): void {
-    const snap = toSnapshot(this._data);
+    const snap = this._data.map((v) => {
+      return {n: v, tag: ""};
+    });
     instructions.forEach((v) => {
       const idx = v[0];
       if (idx == null) return;
@@ -40,10 +42,3 @@ export class UnimplementedError extends Error {
 
 export type Snapshot = {n: number, tag: string}[];
 type AddTagInstructions = [number | null | undefined, string][]
-
-export const toSnapshot = (a: number[]): Snapshot => {
-  const snap = a.map((v) => {
-    return {n: v, tag: ""};
-  });
-  return snap;
-};

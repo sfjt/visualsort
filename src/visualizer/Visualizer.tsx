@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { Snapshot, toSnapshot } from "../sorter";
+import { Snapshot } from "../sorter";
 import { NumberVisual } from "./NumberVisual";
 
 type Props = {
@@ -13,14 +13,14 @@ type Props = {
 };
 
 type State = {
-  snapshot: Snapshot;
+  snapshot: Snapshot | number[];
   timerCount: number;
   complete: boolean;
 };
 
 export const Visualizer: FC<Props> = (props)=> {
   const defaultState: State = {
-    snapshot: toSnapshot(props.input),
+    snapshot: props.input,
     timerCount: 0,
     complete: false
   };
@@ -47,7 +47,7 @@ export const Visualizer: FC<Props> = (props)=> {
       return;
     }
 
-    setState({...state, snapshot: toSnapshot(props.result), complete: true});
+    setState({...state, snapshot: props.result, complete: true});
   };
 
   useEffect(() => {
@@ -58,15 +58,26 @@ export const Visualizer: FC<Props> = (props)=> {
     };
   }, [state]);
   
-  const nv = state.snapshot.map((v, i) =>
-  <NumberVisual 
-    value={v.n}
-    tag={v.tag}
-    scale={props.numberDisplayScale}
-    width={props.numberDisplayWidth}
-    key={`nv-${i.toString()}`}
-    />
-  );
+  const nv = state.snapshot.map((v, i) => {
+    let value: number;
+    let tag: string;
+    if (typeof v === "number") {
+      value = v;
+      tag = "";
+    } else {
+      value = v.n;
+      tag = v.tag;
+    }
+
+    return (
+      <NumberVisual 
+        value={value}
+        tag={tag}
+        scale={props.numberDisplayScale}
+        width={props.numberDisplayWidth}
+        key={`nv-${i.toString()}`}/>
+    );
+  });
 
   return (
     <div id="visualizer-container">
