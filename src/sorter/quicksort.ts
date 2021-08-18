@@ -9,10 +9,10 @@ export class QuickSort extends Sorter {
     const partition = (a: number[], lo: number, hi: number): number => {
       const mid = Math.floor((lo + hi) / 2);
       const pivot = a[mid];
-      const _ts = (l: number, h: number) => {
+      const _ts = (x: number, y: number) => {
         return this._takeSnapshot([
-          [l, "active"],
-          [h, "active"],
+          [x, "active"],
+          [y, "active"],
           [mid, "pivot"]
         ]);
       };
