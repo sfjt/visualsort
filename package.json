@@ -4,7 +4,7 @@
   "description": "Vasualized sort algo demo",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "build": "webpack --config webpack.prod.js",
     "devserver": "webpack serve --open --config webpack.dev.js",
     "lint": "eslint src/**/*.{ts,tsx}"

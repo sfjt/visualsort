@@ -2,6 +2,11 @@ import { Sorter, UnimplementedError } from "./sorterbase";
 import { QuickSort } from "./quicksort";
 import { BubbleSort } from "./bubblesort";
 
+/* eslint  @typescript-eslint/no-explicit-any: 0 */
+const _s = (v: any[]) => {
+  return (JSON.stringify(v));
+};
+
 describe("Test Sorter Base", () => {
   test("sort method throws UninplementedError.", () => {
     const so = new Sorter([1, 2, 3]);
@@ -41,31 +46,35 @@ describe("Test Sorter Base", () => {
     so["_takeSnapshot"]([[1, "dummy"], [undefined, "dummy"], [null, "dummy"]]);
     so["_takeSnapshot"]([]);
 
-    expect(JSON.stringify(so.snapshots)).toBe(JSON.stringify(expected));
+    expect(_s(so.snapshots)).toBe(_s(expected));
+  });
+
+  test("_swap method swaps two elements in _data array.", () => {
+    const input = [1, 2, 3];
+    const expected = [3, 2, 1];
+    const so = new Sorter(input);
+    so["_swap"](0, 2);
+    expect(_s(so["_data"])).toBe(_s(expected));
   });
 });
 
 describe.each([
-  [[4, 10, 1, 7, 6, 8, 2, 9, 3, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
-  [[3, 2, 1, 0, -1, -2], [-2, -1, 0, 1, 2, 3]],
-  [[9, 0, -5, 80, 70283, 1293, 22, -1, 236, 0, -5, -81671], [-81671, -5, -5, -1, 0, 0, 9, 22, 80, 236, 1293, 70283]],
-  [[-1, -100, -10], [-100, -10, -1]],
-  [[1000, 5], [5, 1000]],
-  [[1], [1]],
-  [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
-  [[], []],
-])("Test Sorter Implementations", (input, expected) => {
-  test(`${QuickSort.algorithmName}: ${JSON.stringify(input)} should be sorted to ${JSON.stringify(expected)}.`, () => {
-    const qs = new QuickSort(input);
+  [QuickSort.algorithmName, QuickSort],
+  [BubbleSort.algorithmName, BubbleSort]
+])("Test %s Implementations", (_, SorterType) => {
+  test.each([
+    [[4, 10, 1, 7, 6, 8, 2, 9, 3, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+    [[3, 2, 1, 0, -1, -2], [-2, -1, 0, 1, 2, 3]],
+    [[9, 0, -5, 80, 70283, 1293, 22, -1, 236, 0, -5, -81671], [-81671, -5, -5, -1, 0, 0, 9, 22, 80, 236, 1293, 70283]],
+    [[-1, -100, -10], [-100, -10, -1]],
+    [[1000, 5], [5, 1000]],
+    [[1], [1]],
+    [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+    [[], []],
+  ])(`%j should be sorted to %j.`, (input, expected) => {
+    const qs = new SorterType(input);
     qs.sort();
     
-    expect(JSON.stringify(qs.result)).toBe(JSON.stringify(expected));
-  });
-  
-  test(`${BubbleSort.algorithmName}: ${JSON.stringify(input)} should be sorted to ${JSON.stringify(expected)}.`, () => {
-    const qs = new BubbleSort(input);
-    qs.sort();
-    
-    expect(JSON.stringify(qs.result)).toBe(JSON.stringify(expected));
+    expect(_s(qs.result)).toBe(_s(expected));
   });
 });
