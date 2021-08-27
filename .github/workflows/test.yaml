@@ -1,4 +1,4 @@
-name: CI
+name: Run tests
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
   pull_request:
     branches:
     - master
-    - develop
 
 jobs:
   test:
@@ -16,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
+    - name: Checking out...
+      uses: actions/checkout@v2
+    - name: Setting up Node.js...
       uses: actions/setup-node@v2
       with:
         node-version: 14.x
         cache: 'npm'
-    - name: Install dependencies
+    - name: Installing dependencies...
       run: npm ci
-    - name: Execute tests
-      run: npm test
+    - name: Testing...
+      run: npm run test
